@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>גלריית עוגות</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #fff3e0, #ffe0b2);
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+    }
+    header {
+      background-color: #ff9800;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+    }
+    .container {
+      padding: 30px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .cake-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .cake-item {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      transition: transform 0.3s ease;
+    }
+    .cake-item:hover {
+      transform: scale(1.03);
+    }
+    .cake-item img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .cake-item h3 {
+      margin: 10px 0 5px;
+      color: #e65100;
+    }
+    .cake-item p {
+      margin: 0 0 10px;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #fb8c00;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #sendBtn {
+      margin-top: 30px;
+      font-size: 18px;
+      background-color: #25d366;
+    }
+    .form-section {
+      background-color: #ffffffcc;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .form-section h2 {
+      margin-bottom: 15px;
+      color: #e65100;
+    }
+    .form-section input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>גלריית עוגות להזמנה</header>
+  <div class="container">
+    <div class="cake-gallery">
+      <div class="cake-item">
+        <img src="https://via.placeholder.com/300x200.png?text=עוגת+שוקולד" alt="עוגת שוקולד">
+        <h3>עוגת שוקולד</h3>
+        <p>רכה, עשירה, בדיוק כמו שצריך.</p>
+        <button onclick="selectCake('עוגת שוקולד')">אני רוצה את זה!</button>
+      </div>
+      <div class="cake-item">
+        <img src="https://via.placeholder.com/300x200.png?text=עוגת+וניל" alt="עוגת וניל">
+        <h3>עוגת וניל</h3>
+        <p>קלאסית ונעימה, מתאימה לכולם.</p>
+        <button onclick="selectCake('עוגת וניל')">אני רוצה את זה!</button>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>פרטי ההזמנה</h2>
+      <input type="text" id="name" placeholder="שם מלא">
+      <input type="text" id="phone" placeholder="מספר טלפון">
+      <button id="sendBtn" onclick="sendToWhatsapp()">שלח לי בווטסאפ</button>
+    </div>
+  </div>
+
+  <script>
+    let selectedCake = "";
+
+    function selectCake(name) {
+      selectedCake = name;
+      alert("בחרת: " + name);
+    }
+
+    function sendToWhatsapp() {
+      const name = document.getElementById("name").value.trim();
+      const phoneInput = document.getElementById("phone").value.trim();
+
+      if (!selectedCake) {
+        alert("בחר עוגה קודם!");
+        return;
+      }
+      if (!name || !phoneInput) {
+        alert("אנא מלא את השם ומספר הטלפון שלך.");
+        return;
+      }
+
+      const message = `שלום! אני רוצה להזמין את ${selectedCake}
+שם: ${name}
+טלפון: ${phoneInput}`;
+      const phone = "9725XXXXXXXX"; // שים כאן את המספר שלך בלי ה-0 בהתחלה
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`);
+    }
+  </script>
+</body>
+</html>
